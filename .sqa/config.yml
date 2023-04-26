@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.10
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cessda/cessda.metadata.harvester:
+      branch: main
+      repo: https://github.com/cessda/cessda.metadata.harvester.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cessda/cessda.metadata.harvester git:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-wisteria-chamois.sh
+        container: qc.acc_blurry-wisteria-loon
+  QC.Doc:
+    repos:
+      github.com/cessda/cessda.metadata.harvester find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-russet-jellyfish.sh
+        container: qc.doc_lousy-indigo-hummingbird
+      github.com/cessda/cessda.metadata.harvester git:
+        commands:
+        - /usr/bin/env sh .sqa/script.beady-harlequin-koala.sh
+        container: qc.doc_skanky-beige-cichlid
+      github.com/cessda/cessda.metadata.harvester markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.leaky-aquamarine-dodo.sh
+        container: qc.doc_shabby-peach-seahorse
+  QC.Lic:
+    repos:
+      github.com/cessda/cessda.metadata.harvester licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.tasty-khaki-wolverine.sh
+        container: qc.lic_fuzzy-bistre-yak
+  QC.Sty:
+    repos:
+      github.com/cessda/cessda.metadata.harvester checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-tomato-falcon.sh
+        container: qc.sty_scaly-celadon-dane
+      github.com/cessda/cessda.metadata.harvester jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-myrtle-antelope.sh
+        container: qc.sty_snazzy-magnolia-quetzal
+  QC.Ver:
+    repos:
+      github.com/cessda/cessda.metadata.harvester get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.craggy-mauve-moth.sh
+        container: qc.ver_hasty-green-duck
+timeout: 5400
